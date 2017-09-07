@@ -2,3 +2,4 @@
 
 <p> <%= @product.name%> <%=@product.description %>
     <%=@product.price_in_cents %> </p>
+<%= link_to("Edit","/products/#{@product.id}/edit")%>

@@ -1,5 +1,22 @@
 <p> <%= @product.name%> <%=@product.description %>
-    <%=@product.price_in_dollars %> </p>
+    <%=@product.price_in_dollars %>
+    </p>
+
+    <ul>
+      <!--get te current product then get all the current reviews for it , look at products controller to ensure other data base is connected (see @review) -- >
+      <!--
+      - Get current product as @product
+      - Get all reviews for this product using .reviews method
+      - Loop over reviews
+      -->
+      <% @product.reviews.each do |review| %>
+      <li>
+        <strong>Comment:</strong> <%= review.comment %><br/>
+        <strong>Rating</strong> <%= review.rating%><br/>
+      </li><br />
+
+      <% end%>
+
 <%= link_to("Edit","/products/#{@product.id}/edit")%>
 
 <%= link_to("Delete", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure you want to delete this product?"})%>

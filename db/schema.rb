@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907211139) do
+ActiveRecord::Schema.define(version: 20170907214643) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 20170907211139) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "description"
+    t.text "comment"
     t.integer "rating"
+    t.integer "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
 end

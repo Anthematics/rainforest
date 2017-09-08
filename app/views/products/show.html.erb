@@ -8,33 +8,7 @@
 
 		<h4>New review </h4>
 
-	<%= form_for([@product, @review]) do |f| %>
-		<% if @review.errors.any? %>
-			<div id ="error explaination">
-				<h2><%= pluralize(@review.errors.count,"error")%> prohibited this review from being saved  </h2>
-
-				<ul>
-					<%@review.errors.full.messages.each do |msg| %>
-						<li> <%= msg %> </li>
-						<% end %>
-				</ul>
-			</div>
-		<% end %>
-
-		<div class= "field">
-			<%=f.label :comment %>
-			<%=f.text_area :comment %>
-		</div>
-
-<div class= "field">
-	<%=f.label :rating %>
-	<%=f.number_field :rating%>
-</div>
-
-		<div class "actions">
-			<%=f.submit %>
-		</div>
-	<% end %>
+		<%= render "/reviews/form.html.erb"%>
 			<!--get the current product then get all the current reviews for it , look at products controller to ensure other data base is connected (see @review) -- >
 			<!--
 			- Get current product as @product
@@ -45,7 +19,9 @@
 			<% @product.reviews.each do |review| %>
 			<p>
 				<strong>Comment:</strong> <%= review.comment %><br/>
-				<strong>Rating</strong> <%= review.rating%> <br> <%= review.id%> <br>
+				<strong>Rating</strong> <%= review.rating%> <br>
 			</p>
+			<%= link_to "Edit review",edit_product_review_path(review) %>
 			<% end%>
+
 		</ul>

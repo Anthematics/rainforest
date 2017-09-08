@@ -4,7 +4,6 @@ class ReviewsController < ApplicationController
 		@reviews = Review.all
 	end
 
-
 	def new
 		@review = Review.new
 	end
@@ -26,7 +25,9 @@ class ReviewsController < ApplicationController
 		else
 			render "/products/show"
 		end
+
 	end
+
 	def destroy
 		@review = Review.find(params[:id])
 		@review.destroy
@@ -35,19 +36,20 @@ class ReviewsController < ApplicationController
 	end
 
 	def edit
-		@review = Review.find(params[:id])
+		@product= Product.find(params[:product_id])
+		@review = Review.find(params[:product_id])
+
 	end
 
 	def update
+		@product= Product.find(params[:product_id])
 		@review = Review.find(params[:id])
-
 		@review.comment = params[:review][:comment]
 		@review.rating= params[:review][:rating]
-		@review.product_id = params[:review][:product_id]
 
 		if @review.save
-			flash[:notice] = "You have successfully changed #{@review.name} "
-			redirect_to "/reviews/#{@review.id}"
+			flash[:notice] = "You have successfully changed your review"
+			redirect_to "/products/#{@product.id}"
 		else
 			render :edit
 		end

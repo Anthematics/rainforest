@@ -1,22 +1,51 @@
-<p> <%= @product.name%> <%=@product.description %>
-    <%=@product.price_in_dollars %>
-    </p>
+<p><b> Name:</b> <%= @product.name%> <br> <b> Description:</b> <%=@product.description %>
+		<br><b> Price:</b><%=@product.price_in_dollars %>
+		</p>
 
-    <ul>
-      <!--get te current product then get all the current reviews for it , look at products controller to ensure other data base is connected (see @review) -- >
-      <!--
-      - Get current product as @product
-      - Get all reviews for this product using .reviews method
-      - Loop over reviews
-      -->
-      <% @product.reviews.each do |review| %>
-      <li>
-        <strong>Comment:</strong> <%= review.comment %><br/>
-        <strong>Rating</strong> <%= review.rating%><br/>
-      </li><br />
+	<%= link_to("Edit","/products/#{@product.id}/edit")%>
 
-      <% end%>
+	<%= link_to("Delete", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure you want to delete this product?"})%>
 
-<%= link_to("Edit","/products/#{@product.id}/edit")%>
+		<h4>New review </h4>
 
-<%= link_to("Delete", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure you want to delete this product?"})%>
+	<%= form_for([@product, @review]) do |f| %>
+		<% if @review.errors.any? %>
+			<div id ="error explaination">
+				<h2><%= pluralize(@review.errors.count,"error")%> prohibited this review from being saved  </h2>
+
+				<ul>
+					<%@review.errors.full.messages.each do |msg| %>
+						<li> <%= msg %> </li>
+						<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<div class= "field">
+			<%=f.label :comment %>
+			<%=f.text_area :comment %>
+		</div>
+
+<div class= "field">
+	<%=f.label :rating %>
+	<%=f.number_field :rating%>
+</div>
+
+		<div class "actions">
+			<%=f.submit %>
+		</div>
+	<% end %>
+			<!--get the current product then get all the current reviews for it , look at products controller to ensure other data base is connected (see @review) -- >
+			<!--
+			- Get current product as @product
+			- Get all reviews for this product using .reviews method
+			- Loop over reviews
+			-->
+		<ul>
+			<% @product.reviews.each do |review| %>
+			<p>
+				<strong>Comment:</strong> <%= review.comment %><br/>
+				<strong>Rating</strong> <%= review.rating%> <br> <%= review.id%> <br>
+			</p>
+			<% end%>
+		</ul>

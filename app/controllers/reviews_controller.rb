@@ -29,15 +29,17 @@ class ReviewsController < ApplicationController
 	end
 
 	def destroy
-		@review = Review.find(params[:id])
+		@product = Product.find(params[:product_id])
+		@review = @product.reviews.find(params[:id])
 		@review.destroy
 		flash[:notice] = "You have successfully deleted the review "
-		redirect_to "/reviews"
+		redirect_to "/products"
 	end
 
 	def edit
+		puts "paraksb hash ios #{params}"
 		@product= Product.find(params[:product_id])
-		@review = Review.find(params[:product_id])
+		@review = Review.find(params[:id])
 
 	end
 

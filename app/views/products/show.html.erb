@@ -1,27 +1,27 @@
 <p><b> Name:</b> <%= @product.name%> <br> <b> Description:</b> <%=@product.description %>
-		<br><b> Price:</b><%=@product.price_in_dollars %>
-		</p>
+    <br><b> Price:</b><%=@product.price_in_dollars %> <br> product.id :<%= @product.id%>
+    </p>
 
-	<%= link_to("Edit","/products/#{@product.id}/edit")%>
+  <%= link_to("Edit","/products/#{@product.id}/edit")%>
 
-	<%= link_to("Delete", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure you want to delete this product?"})%>
+  <%= link_to("Delete", "/products/#{@product.id}", method: :delete, data: {confirm: "Are you sure you want to delete this product?"})%>
 
-		<h4>New review </h4>
+    <h4>New review </h4>
 
-		<%= render "/reviews/form.html.erb"%>
-			<!--get the current product then get all the current reviews for it , look at products controller to ensure other data base is connected (see @review) -- >
-			<!--
-			- Get current product as @product
-			- Get all reviews for this product using .reviews method
-			- Loop over reviews
-			-->
-		<ul>
-			<% @product.reviews.each do |review| %>
-			<p>
-				<strong>Comment:</strong> <%= review.comment %><br/>
-				<strong>Rating</strong> <%= review.rating%> <br>
-			</p>
-			<%= link_to "Edit review",edit_product_review_path(review) %>
-			<% end%>
+    <%= render "/reviews/form.html.erb"%>
+      <!--get the current product then get all the current reviews for it , look at products controller to ensure other data base is connected (see @review) -- >
+      <!--
+      - Get current product as @product
+      - Get all reviews for this product using .reviews method
+      - Loop over reviews
+      -->
+    <ul>
+      <% @product.reviews.each do |review| %>
+      <p>
+        <strong>Comment:</strong> <%= review.comment %><br/>
+        <strong>Rating</strong> <%= review.rating%> <%= review.id%><br>
+      </p>
+      <%= link_to "Edit review", edit_product_review_path(@product,review)%>
+      <% end%>
 
-		</ul>
+    </ul>

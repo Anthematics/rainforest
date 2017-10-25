@@ -1,15 +1,22 @@
-<h1> Welcome to Rainforest! </h1>
+   <h1> Welcome to Rainforest! </h1>
 
-  <h2> Our Products</h2>
+   <h2> Our Products</h2>
 
-  <ul>
-    <% @products.each do |product| %>
-    <li>
-      <strong>Product Name:</strong> <%= product.name %><br/>
-      <strong>Description:</strong> <%= product.description%><br/>
-      <strong>Price:</strong> <%= product.price_in_dollars %><br />
-      <%= link_to("#{product.name}","/products/#{product.id}") %>
-    </li><br />
 
-    <% end%>
-  </ul>
+<div class="container">
+  <div class="row">
+  <% @products.each do |product| %>
+    <div class="col-sm">
+      <div class="card" style="width: 20rem;">
+        <img class="card-img-top" src="http://lorempixel.com/400/200" alt="Card image cap">
+          <div class="card-body">
+            <strong>Product Name:</strong> <%= product.name %><br/>
+            <strong>Description:</strong> <%= product.description%><br/>
+            <strong>Price:</strong> <%= product.price_in_dollars %><br />
+            <button type="button" class="btn btn-success"><%= link_to("#{product.name}","/products/#{product.id}") %></a>
+          </div>
+    </div>
+  </div>
+  <% end%>
+</div><br>
+</div>

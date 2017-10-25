@@ -33,7 +33,7 @@ price_in_cents: 500
 Product.create(
 name: "Dining Table",
 description: "You can eat off of it",
-price_in_cents: 600 
+price_in_cents: 600
 )
 
 Product.create(
